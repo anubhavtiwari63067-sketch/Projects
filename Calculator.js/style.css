@@ -1,0 +1,135 @@
+/*
+====================================
+1. CALCULATOR BODY & DISPLAY STYLES
+====================================
+*/
+
+body {
+  /* White background is fine for the page */
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex; /* Center the calculator vertically */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.calc-body {
+  /* Width reduced slightly to fit 6 buttons per row nicely */
+  width: 350px; 
+  background: #202020; /* Darker background for a sleek look */
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#display {
+  width: 100%; /* Take full width of parent */
+  height: 60px;
+  font-size: 32px;
+  text-align: right;
+  margin-bottom: 15px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 10px;
+  background: #f0f0f0; /* Light background for display */
+  box-sizing: border-box;
+  overflow-x: auto; /* Allow scrolling if number is too long */
+}
+
+#error {
+  color: #ff5757; /* A strong red for error messages */
+  font-size: 14px;
+  margin-top: 5px;
+  /* Make sure error space is reserved, even if empty */
+  display: block; 
+  min-height: 18px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/*
+====================================
+2. BUTTONS GRID & ROW MANAGEMENT
+====================================
+*/
+
+.calc-row {
+  /* Flexbox is used to arrange buttons in a row */
+  display: flex;
+  justify-content: space-between; /* Space out buttons */
+  margin-bottom: 8px; /* Space between rows */
+}
+
+/* Base button style */
+button {
+  /* Calculate width to fit 6 buttons plus margins inside 350px container */
+  width: 48px; 
+  height: 48px;
+  font-size: 20px;
+  border: none;
+  border-radius: 50%; /* Make number buttons round */
+  background: #505050; /* Dark gray for numbers */
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.95); /* Press effect */
+}
+
+/*
+====================================
+3. OPERATOR & SPECIAL BUTTON STYLES
+====================================
+*/
+
+/* Numbers and Decimal */
+button:not(.top-row button):not([onclick*="operation"]):not([onclick*="calculate"]):not([onclick*="special"]) {
+    background: #505050; /* Dark Gray */
+}
+
+/* Operators (+, -, *, /) */
+[onclick*="operation"] {
+  background: #ff9500; /* Orange for arithmetic operations */
+  color: #ffffff;
+  border-radius: 10px; /* Keep operators square/rectangular */
+}
+
+/* Special Functions (C, %, √, cube, square) */
+[onclick*="clearDisplay"], [onclick*="special"] {
+    background: #d4d4d4; /* Light gray for utility buttons */
+    color: #000000;
+}
+
+/* Clear Button (C) - if you want it to stand out */
+[onclick*="clearDisplay"] {
+    background: #ff5757; 
+    color: #ffffff;
+}
+
+/* Equal Button (Last button in the last row) */
+[onclick*="calculate"] {
+  background: #77c745; /* Green for Equal */
+  color: #ffffff;
+}
+
+/* Make '0' button wider if needed (assuming 0 is the only wide button) */
+.calc-row:last-child button:first-child {
+    width: 106px; /* Approx width of two buttons plus margin */
+    border-radius: 10px; /* Make it rectangular */
+    text-align: left;
+    padding-left: 15px;
+}
+
+
+/* Top Row (M+, M-, MRC, GT, AC, OFF) - Utility buttons */
+.top-row button {
+    background: #606060;
+    font-size: 16px;
+    height: 35px; /* Slightly smaller height */
+    width: 50px;
+    border-radius: 8px;
+}
